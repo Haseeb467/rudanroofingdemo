@@ -21,6 +21,8 @@ import {
 } from "lucide-react";
 import pages from "./catalog.json";
 import AboutPage from "./AboutPage";
+import RoofOnAPalletPage from "./RoofOnAPalletPage";
+import DIYPage from "./DIYPage";
 import "./fonts.css";
 import "./style.css";
 
@@ -106,7 +108,7 @@ function Header() {
                 <a href="/shop">Products</a>
                 <a href="/services">Services</a>
                 <a href="/areas">Areas we serve</a>
-                <a href="/blog">Journal & guides</a>
+                <a href="/blog">Blog</a>
                 <a href="/community-service">Community</a>
                 <a href="/contact-us">Contact</a>
               </div>
@@ -1150,6 +1152,28 @@ function About() {
     />
   );
 }
+function RoofOnAPallet() {
+  const page = useContent("/roof-on-a-pallet");
+  return page ? (
+    <RoofOnAPalletPage page={page} />
+  ) : (
+    <PageHero
+      title="ROOF ON A PALLET."
+      description="Loading page details..."
+    />
+  );
+}
+function DIY() {
+  const page = useContent("/do-it-yourself");
+  return page ? (
+    <DIYPage page={page} />
+  ) : (
+    <PageHero
+      title="DO IT YOURSELF."
+      description="Loading page details..."
+    />
+  );
+}
 
 function App() {
   const path = decodeURI(window.location.pathname).replace(/\/$/, "") || "/";
@@ -1166,6 +1190,8 @@ function App() {
   let content;
   if (path === "/") content = <Home />;
   else if (path === "/about-us") content = <About />;
+  else if (path === "/roof-on-a-pallet") content = <RoofOnAPallet />;
+  else if (path === "/do-it-yourself") content = <DIY />;
   else if (path === "/shop") content = <Catalog />;
   else if (["/projects", "/blog", "/services"].includes(path))
     content = <Listing type={path.slice(1)} />;
